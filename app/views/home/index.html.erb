@@ -1,0 +1,13 @@
+<html>
+<head>
+	<%= stylesheet_link_tag "style" %>
+	<title>Knjige</title>
+</head>
+<body>
+	<h1>zdravo</h1>
+	<ul>
+		<%= link_to 'Prijava', new_user_session_path %>
+		<%= link_to 'Registracija', new_user_registration_path %>
+		<%= link_to 'Odjava', destroy_user_session_path, :method => :delete %>
+	</ul>
+</body>

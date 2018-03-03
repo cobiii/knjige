@@ -13,12 +13,14 @@
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :chapter_user_id %>
+    <%#= form.number_field :user_id, id: :chapter_user_id %>
+    <%= collection_select(:chapter, :user_id, User.all, :id, :email) %>
   </div>
 
   <div class="field">
     <%= form.label :book_id %>
-    <%= form.number_field :book_id, id: :chapter_book_id %>
+    <%#= form.number_field :book_id, id: :chapter_book_id %>
+    <%= collection_select(:chapter, :book_id, current_user.books, :id, :name) %>
   </div>
 
   <div class="field">

@@ -1,19 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="telo">
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @chapter.user_id %>
-</p>
+	<p>
+	  <strong>User:</strong>
+	  <%= @chapter.user_id %>
+	</p>
 
-<p>
-  <strong>Book:</strong>
-  <%= @chapter.book_id %>
-</p>
+	<p>
+	  <strong>Book:</strong>
+	  <%= @chapter.book_id %>
+	</p>
 
-<p>
-  <strong>Text:</strong>
-  <%= @chapter.text %>
-</p>
+	<p>
+	  <strong>Text:</strong>
+	  <%= @chapter.text %>
+	</p>
 
-<%= link_to 'Edit', edit_chapter_path(@chapter) %> |
-<%= link_to 'Back', chapters_path %>
+	<%= link_to 'Edit', edit_chapter_path(@chapter) %> |
+	<%= link_to 'Back', chapters_path %>
+</div>

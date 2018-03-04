@@ -1,10 +1,9 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
-
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = Book.select("*").joins(:chapters).all
+    @chapters = Book.select("*").joins(:chapters).where("chapters.user_id"=>current_user).all
   end
 
   # GET /chapters/1
@@ -69,6 +68,6 @@ class ChaptersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
-      params.require(:chapter).permit(:user_id, :book_id, :text)
+      params.require(:chapter).permit(:user_id, :book_id, :text, :number)
     end
 end

@@ -18,7 +18,9 @@
 
 	<p>
 	  <strong>Text:</strong>
-	  <%= @book.description %>
+	  <% @chapter.each do |c| %>
+	  <%= c.text %>
+	  <% end %>
 	</p>
 
 	<%= link_to 'Edit', edit_book_path(@book) %> |

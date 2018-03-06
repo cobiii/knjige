@@ -24,14 +24,21 @@ class ChaptersController < ApplicationController
   # POST /chapters.json
   def create
     @chapter = Chapter.new(chapter_params)
-
+    @stevilo = Chapter.where("book_id"=>@chapter.book_id).count(:id)
+    @number = Book.select("chapter").where("id"=>@chapter.book_id).pluck(:chapter)
+    @number1=@number.to_s.to_i
+    @coglavje = Book.select("chapter").where("id"=>@chapter.book_id).pluck(:chapter)
     respond_to do |format|
-      if @chapter.save
-        format.html { redirect_to @chapter, notice: 'Chapter was successfully created.' }
-        format.json { render :show, status: :created, location: @chapter }
-      else
-        format.html { render :new }
-        format.json { render json: @chapter.errors, status: :unprocessable_entity }
+      if @chapter.number>@poglavje && @chapter.number<@poglavje
+        if @stevilo<@number1
+          if @chapter.save
+            format.html { redirect_to @chapter, notice: 'Chapter was successfully created.' }
+            format.json { render :show, status: :created, location: @chapter }
+          else
+            format.html { render :new }
+            format.json { render json: @chapter.errors, status: :unprocessable_entity }
+          end
+        end
       end
     end
   end

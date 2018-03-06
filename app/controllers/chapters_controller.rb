@@ -26,19 +26,29 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.new(chapter_params)
     @stevilo = Chapter.where("book_id"=>@chapter.book_id).count(:id)
     @number = Book.select("chapter").where("id"=>@chapter.book_id).pluck(:chapter)
-    @number1=@number.to_s.to_i
-    @coglavje = Book.select("chapter").where("id"=>@chapter.book_id).pluck(:chapter)
+    @poglavje = Chapter.where("book_id"=>@chapter.book_id, "number"=>@chapter.number).count(:id)
     respond_to do |format|
-      if @chapter.number>@poglavje && @chapter.number<@poglavje
-        if @stevilo<@number1
-          if @chapter.save
-            format.html { redirect_to @chapter, notice: 'Chapter was successfully created.' }
-            format.json { render :show, status: :created, location: @chapter }
+      if(@poglavje==0)                                      ## preveri ce poglavje ze obstaja
+        if @chapter.number<=@number[0] and @chapter.number>0    ## preveri ce je st poglavja vecja od dolocenih stevilo poglavij oz manj kot 0
+          if @stevilo<@number[0]          ## preveri ce je stevilo poglavji za to knjigo maksimalno
+            if @chapter.save
+              format.html { redirect_to @chapter, notice: 'Chapter was successfully created.' }
+              format.json { render :show, status: :created, location: @chapter }
+            else
+              format.html { render :new }
+              format.json { render json: @chapter.errors, status: :unprocessable_entity }
+            end
           else
             format.html { render :new }
             format.json { render json: @chapter.errors, status: :unprocessable_entity }
           end
+        else
+         format.html { render :new }
+         format.json { render json: @chapter.errors, status: :unprocessable_entity }
         end
+      else
+        format.html { render :new }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
       end
     end
   end

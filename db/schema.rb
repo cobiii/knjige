@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20180304094605) do
 
   create_table "books", force: :cascade do |t|
     t.string "name"
-    t.integer "chapter"
+    t.integer "chapter"                                                             #stevilo poglavij
     t.text "description"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180304094605) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number"
+    t.integer "number"                                                             #stevilka poglavja
   end
 
   create_table "users", force: :cascade do |t|
